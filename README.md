@@ -106,6 +106,33 @@ The app uses **Groq API** for AI text summarization. To set up:
 
 The API key is automatically loaded from environment variables. Make sure `.env` is in your `.gitignore` (already configured).
 
+## 🚀 Deployment
+
+### Deploy to Vercel
+
+This project is configured for easy deployment on Vercel:
+
+1. **Connect GitHub Repository:**
+   - Go to [vercel.com](https://vercel.com)
+   - Sign in with your GitHub account
+   - Click "Add New Project"
+   - Import your `ai-text-summarizer` repository
+
+2. **Configure Environment Variables:**
+   - In Vercel project settings, go to "Environment Variables"
+   - Add: `VITE_GROQ_API_KEY` with your Groq API key value
+   - Make sure to add it for all environments (Production, Preview, Development)
+
+3. **Deploy:**
+   - Vercel will automatically detect Vite and configure the build
+   - Click "Deploy" and your app will be live!
+
+4. **Automatic Deployments:**
+   - Every push to `main` branch will trigger a production deployment
+   - Pull requests will create preview deployments
+
+**Note:** The `vercel.json` file is already configured for optimal Vite deployment.
+
 ## 📄 License
 
 MIT
