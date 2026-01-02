@@ -1,18 +1,30 @@
-# AI Dashboard
+# AI Insight Dashboard
 
-A clean React + TypeScript dashboard that integrates an AI summarization feature using an external API, with proper architecture and UI separation.
+A modern React + TypeScript dashboard that demonstrates AI integration with text summarization and conversational AI capabilities. Built with clean architecture, reusable services, and professional UI/UX patterns.
 
 ## 🎯 Features
 
-- **AI Text Summarization**: Paste text and get AI-generated summaries
-- **Clean Architecture**: Separated concerns with hooks, services, and components
-- **TypeScript**: Full type safety throughout the application
-- **Modern UI**: Clean, responsive design with smooth animations
+### 📝 Text Summarizer
+- **Customizable Summaries**: Control length (short/medium/long), tone (neutral/simple/professional), and format (bullets/paragraphs)
+- **Smart Prompting**: Advanced prompt engineering for tailored output
+- **Real-time Processing**: Fast AI-powered summarization using Groq API
+
+### 💬 Chat Assistant
+- **Conversational AI**: Context-aware chat with message history
+- **Auto-scroll**: Automatic scrolling to latest messages
+- **Typing Indicators**: Visual feedback during AI processing
+- **Clear Conversation**: Easy reset functionality
+
+### 🏗️ Architecture Highlights
+- **Clean Component Structure**: Organized by feature (Summarizer, Chat, UI)
+- **Reusable AI Service**: Single service used by both features
+- **TypeScript**: Full type safety throughout
+- **Modern UI/UX**: Professional design with loading states, error handling, and responsive layout
 
 ## 🧱 Tech Stack
 
-- **React** + **TypeScript** (Vite)
-- **Groq API** for AI text summarization
+- **React 19** + **TypeScript** (Vite)
+- **Groq API** for AI text summarization and chat
 - **Fetch API** for API integration
 - **CSS** for styling (no heavy dependencies)
 
@@ -21,14 +33,25 @@ A clean React + TypeScript dashboard that integrates an AI summarization feature
 ```
 src/
  ├─ components/
- │   ├─ Header.tsx
- │   ├─ TextInput.tsx
- │   ├─ SummaryOutput.tsx
- │   └─ ChatBox.tsx
- ├─ hooks/
- │   └─ useAISummary.ts
+ │   ├─ Chat/
+ │   │   ├─ ChatWindow.tsx
+ │   │   ├─ ChatBubble.tsx
+ │   │   ├─ ChatInput.tsx
+ │   │   └─ ChatAssistant.tsx
+ │   ├─ Summarizer/
+ │   │   ├─ TextInput.tsx
+ │   │   ├─ PromptControls.tsx
+ │   │   ├─ SummaryOutput.tsx
+ │   │   └─ Summarizer.tsx
+ │   ├─ UI/
+ │   │   ├─ Button.tsx
+ │   │   ├─ Loader.tsx
+ │   │   └─ ErrorMessage.tsx
+ │   └─ Header.tsx
  ├─ services/
  │   └─ aiService.ts
+ ├─ hooks/
+ │   └─ useAISummary.ts (legacy, can be removed)
  ├─ pages/
  │   └─ Dashboard.tsx
  ├─ types/
@@ -61,41 +84,44 @@ npm run build
 
 The app follows a clean architecture pattern:
 
-1. **UI Layer** (Components): `TextInput`, `SummaryOutput`, `Header`
-2. **Business Logic** (Hooks): `useAISummary` - manages state and API calls
-3. **Service Layer**: `aiService` - handles API communication
+1. **UI Layer** (Components): Organized by feature (Summarizer, Chat) and shared UI components
+2. **Service Layer**: `aiService.ts` - reusable AI service for both summarization and chat
+3. **Business Logic**: Component-level state management with React hooks
 4. **Types**: TypeScript definitions for type safety
 
 ### Data Flow
 
 ```
-UI (TextInput)
- → hook (useAISummary)
-   → service (aiService)
-     → API (AI)
+UI (Components)
+ → Service (aiService)
+   → Groq API
+     → Response
+       → UI Update
 ```
 
 ## 📝 Current Status
 
-**Phase 1: AI Text Summarizer (MVP)** ✅
+**Phase 1: AI Dashboard (MVP)** ✅
 
-- [x] Text input component
-- [x] Groq API integration
-- [x] Summary output display
-- [x] Loading states
-- [x] Error handling
-- [x] Clean UI
+- [x] Tabbed dashboard interface
+- [x] Text summarizer with prompt controls
+- [x] Chat assistant with message history
+- [x] Shared AI service architecture
+- [x] Loading states and error handling
+- [x] Clean, responsive UI
+- [x] TypeScript type safety
 
-**Phase 2: Coming Soon**
+**Phase 2: Future Enhancements**
 
-- [ ] Chat UI
-- [ ] Loading skeletons
-- [ ] Enhanced UI features
-- [ ] History/Previous summaries
+- [ ] Dark/Light mode toggle
+- [ ] Conversation history persistence
+- [ ] Export summaries
+- [ ] Multiple AI model selection
+- [ ] Enhanced animations
 
 ## 🔧 Configuration
 
-The app uses **Groq API** for AI text summarization. To set up:
+The app uses **Groq API** for AI capabilities. To set up:
 
 1. Create a `.env` file in the root directory
 2. Add your Groq API key:
@@ -133,6 +159,28 @@ This project is configured for easy deployment on Vercel:
 
 **Note:** The `vercel.json` file is already configured for optimal Vite deployment.
 
+## 🎨 UI/UX Features
+
+- **Loading States**: Visual feedback during AI processing
+- **Error Handling**: User-friendly error messages
+- **Disabled States**: Proper button/input states during processing
+- **Responsive Design**: Works on desktop and mobile
+- **Keyboard Support**: Enter to send, Ctrl+Enter for textarea
+- **Smooth Animations**: Fade-in and slide-in effects
+
+## 🧪 States Handled
+
+| State | Implementation |
+|-------|---------------|
+| Loading | Spinner + disabled inputs |
+| Error | Error message display |
+| Empty | Placeholder states |
+| Disabled | While processing |
+
 ## 📄 License
 
 MIT
+
+## 🙏 Acknowledgments
+
+Built with [Groq](https://groq.com) for fast AI inference and [Vite](https://vitejs.dev) for lightning-fast development.
